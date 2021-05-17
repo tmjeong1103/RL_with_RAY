@@ -185,7 +185,7 @@ for t in range(int(total_steps)):
 
     # save model
     if t % 10 == 0:
-        torch.save(R.get_weights(), 'model_data/model_weights_1')
+        torch.save(R.get_weights(), 'model_data/model_weights_2')
         print("Weight saved")
 
     # Evaluate
@@ -219,7 +219,8 @@ for t in range(int(total_steps)):
 plt.plot(step_list,ep_max_list,marker='o')
 plt.xlabel('step')
 plt.ylabel('ep_return')
-plt.title("alpha:[%.4f] nu:[%.4f]"%(alpha,nu))
+plt.title("hdim:%s alpha:[%.4f] nu:[%.4f] b:[%.4f] ep_len_rollout:[%d]"
+          %(hdims,alpha,nu,b,ep_len_rollout))
 plt.grid(True, linestyle='--')
 plt.show()
 plt.savefig('ARS_result.png',dpi=100)
