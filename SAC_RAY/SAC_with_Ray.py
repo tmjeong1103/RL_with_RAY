@@ -258,11 +258,11 @@ for t in range(int(total_steps)):
 plt.plot(step_list,ep_max_list,marker='o')
 plt.xlabel('step')
 plt.ylabel('ep_return')
-plt.title("hdim:[%d,%d] alpha_pi:[%.4f] alpha_q:[%.4f]\npolyak:[%.4f] gamma:[%.4f] eps:[%.4f] lr:[%.4f]"
-          %(hdims[0],hdims[1],alpha_pi,alpha_q,polyak,gamma,epsilon,lr))
+plt.title("hdim:%s alpha_pi:[%.4f] alpha_q:[%.4f]\npolyak:[%.4f] gamma:[%.4f] eps:[%.4f] lr:[%.4f]"
+          %(hdims,alpha_pi,alpha_q,polyak,gamma,epsilon,lr))
 plt.grid(True, linestyle='--')
-plt.show()
-plt.savefig('SAC_result.png',dpi=100)
+#plt.show()
+plt.savefig('SAC_result.png', dpi=100)
 
 print("Done.")
 eval_env.close()
