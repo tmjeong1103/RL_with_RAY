@@ -8,7 +8,7 @@ from config import *
 gym.logger.set_level(40) # gym logger
 print("Pytorch version:[%s]."%(torch.__version__))
 
-RENDER_ON_EVAL = True
+RENDER_ON_EVAL = False
 
 def get_env():
     import pybullet_envs, gym
@@ -42,16 +42,22 @@ class RolloutWorkerClass(object):
 
         # Create SAC model and target networks
         self.model = MLPActorCritic(self.odim, self.adim, hdims)
+
+        # # model load
+        # self.model.load_state_dict(torch.load('model_data/model_weights_1'))
+        # print("weight load")
+
         self.target = deepcopy(self.model)
 
-        # # Freeze target networks with respect to optimizers
-        # # (only update via polyak averaging)
-        # for p in self.target.parameters():
-        #     p.requires_grad = False
+        # Freeze target networks with respect to optimizers
+        # (only update via polyak averaging)
+        for p in self.target.parameters():
+            p.requires_grad = False
 
         # Initialize model
         torch.manual_seed(self.seed)
         np.random.seed(self.seed)
+        random.seed(self.seed)
 
         # parameter chain [q1 + q2]
         self.q_vars = itertools.chain(self.model.q1.parameters(), self.model.q2.parameters())
@@ -65,18 +71,11 @@ class RolloutWorkerClass(object):
 
     # get weihts from model and target layer
     def get_weights(self):
-        """
-        Get weights
-        """
         weight_vals = self.model.state_dict()
-        weight_vals_trgt = self.target.state_dict()
-        return weight_vals, weight_vals_trgt
+        return weight_vals
 
-    def set_weights(self, weight_vals, weight_vals_trgt):
-        """
-        Set weights without memory leakage
-        """
-        return self.model.load_state_dict(weight_vals), self.target.load_state_dict(weight_vals_trgt)
+    def set_weights(self, weight_vals):
+        return self.model.load_state_dict(weight_vals)
 
 @ray.remote
 class RayRolloutWorkerClass(object):
@@ -112,13 +111,9 @@ class RayRolloutWorkerClass(object):
     def get_action(self, o, deterministic=False):
         return self.model.get_action(torch.Tensor(o.reshape(1, -1)), deterministic)
 
-    def set_weights(self, weight_vals, weight_vals_trgt):
-        """
-        Set weights without memory leakage
-        """
+    def set_weights(self, weight_vals):
         weights = self.model.load_state_dict(weight_vals)
-        weights_trgt = self.target.load_state_dict(weight_vals_trgt)
-        return weights, weights_trgt
+        return weights
 
     def rollout(self):
         """
@@ -175,8 +170,8 @@ for t in range(int(total_steps)):
     esec = time.time() - start_time
 
     # Synchronize worker weights
-    weights, weights_trgt = R.get_weights()
-    set_weights_list = [worker.set_weights.remote(weights, weights_trgt) for worker in workers]
+    weights = R.get_weights()
+    set_weights_list = [worker.set_weights.remote(weights) for worker in workers]
 
     # Make rollout and accumulate to Buffers
     ops = [worker.rollout.remote() for worker in workers]
@@ -224,6 +219,11 @@ for t in range(int(total_steps)):
         with torch.no_grad():
             for v_main, v_targ in zip(R.model.parameters(), R.target.parameters()):
                 v_targ.data.copy_(polyak*v_targ.data + (1-polyak)*v_main.data)
+
+    # # save model
+    # if t % 200 == 0:
+    #     torch.save(R.get_weights(), 'model_data/model_weights_1')
+    #     print("Weight saved")
 
     # Evaluate
     if (t == 0) or (((t + 1) % evaluate_every) == 0) or (t == (total_steps - 1)):
