@@ -4,6 +4,7 @@ from copy import deepcopy
 import itertools
 from sac import *
 from config import *
+from matplotlib import pyplot as plt
 
 gym.logger.set_level(40) # gym logger
 print("Pytorch version:[%s]."%(torch.__version__))
@@ -165,7 +166,8 @@ replay_buffer_short = ReplayBuffer(odim=odim,adim=adim,size=int(buffer_size_shor
 
 start_time = time.time()
 n_env_step = 0  # number of environment steps
-
+step_list = [] # step list for visualization
+ep_max_list = [] # step list for visualization
 for t in range(int(total_steps)):
     esec = time.time() - start_time
 
@@ -234,6 +236,8 @@ for t in range(int(total_steps)):
                time.strftime("%H:%M:%S", time.gmtime(time.time() - start_time)),
                ram_percent)
               )
+        step_list.append(t) #for visualization
+        ep_ret_list = []  #for visualization
         for eval_idx in range(num_eval):
             o, d, ep_ret, ep_len = eval_env.reset(), False, 0, 0
             if RENDER_ON_EVAL:
@@ -245,10 +249,21 @@ for t in range(int(total_steps)):
                     _ = eval_env.render(mode='human')
                 ep_ret += r  # compute return
                 ep_len += 1
+                ep_ret_list.append(ep_ret)  #for visualization
             print("[Evaluate] [%d/%d] ep_ret:[%.4f] ep_len:[%d]"
                   % (eval_idx, num_eval, ep_ret, ep_len))
+        ep_max_list.append(max(ep_ret_list)) #for visualization
+
+# make ep_ret-total step graph
+plt.plot(step_list,ep_max_list,marker='o')
+plt.xlabel('step')
+plt.ylabel('ep_return')
+plt.title("hdim:[%d,%d] alpha_pi:[%.4f] alpha_q:[%.4f]\npolyak:[%.4f] gamma:[%.4f] eps:[%.4f] lr:[%.4f]"
+          %(hdims[0],hdims[1],alpha_pi,alpha_q,polyak,gamma,epsilon,lr))
+plt.grid(True, linestyle='--')
+plt.show()
+plt.savefig('SAC_result.png',dpi=100)
 
 print("Done.")
-
 eval_env.close()
 ray.shutdown()
