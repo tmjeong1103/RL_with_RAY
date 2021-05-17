@@ -222,6 +222,7 @@ plt.ylabel('ep_return')
 plt.title("alpha:[%.4f] nu:[%.4f]"%(alpha,nu))
 plt.grid(True, linestyle='--')
 plt.show()
+plt.savefig('ARS_result.png',dpi=100)
 
 print("Done.")
 eval_env.close()
