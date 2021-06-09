@@ -1,7 +1,7 @@
 import gym,pybullet_envs,time, psutil, torch
 from memory import *
 from model import *
-from config import *
+from config import Config
 
 print("Pytorch version:[%s]."%(torch.__version__))
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
