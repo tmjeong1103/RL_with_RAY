@@ -40,5 +40,5 @@ class MLP(nn.Module):       # def mlp in def create_ppo_model
 def get_noises_from_weights(weights, nu=0.01):
     noises = {}
     for key, value in weights.items():
-        noises[key] = nu * torch.rand(value.shape)
+        noises[key] = nu * torch.randn(value.shape)     #randn 함수로 설정해야함. rand는 uniform random
     return noises # dictionary
