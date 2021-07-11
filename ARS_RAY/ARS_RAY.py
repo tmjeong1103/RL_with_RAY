@@ -199,7 +199,7 @@ for t in range(int(total_steps)):
                time.strftime("%H:%M:%S", time.gmtime(time.time() - start_time)),
                ram_percent)
               )
-        plot_dict[t] = 0
+        plot_dict[n_env_step] = 0
         ep_ret_list = []  #for visualization
         for eval_idx in range(num_eval):
             o, d, ep_ret, ep_len = eval_env.reset(), False, 0, 0
@@ -215,7 +215,7 @@ for t in range(int(total_steps)):
                 ep_ret_list.append(ep_ret)  #for visualization
             print(" [Evaluate] [%d/%d] ep_ret:[%.4f] ep_len:[%d]"
                   % (eval_idx, num_eval, ep_ret, ep_len))
-        plot_dict[t] = max(ep_ret_list)
+        plot_dict[n_env_step] = max(ep_ret_list)
 
 # for visualization
 file_name = 'ARS_plt_data_1'
