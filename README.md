@@ -1,7 +1,9 @@
 # RL_with_RAY
 
 > Implementation of reinforcement learning algorithms that is applied RAY
+> 
 > In this repo, we implemented this RL_with_RAY code only use RAY CORE from scratch, didn't use RLLib.
+> 
 
 ## Dependencies
 1. Python 3.5
