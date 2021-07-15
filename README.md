@@ -27,4 +27,10 @@ pip install -r requirements.txt
 - 
 
 ### ARS with RAY
-- 
+-
+
+## Reference
+1. https://docs.ray.io/en/master/index.html, RAY Documentation
+2. https://arxiv.org/abs/1707.06347, PPO Paper
+3. https://arxiv.org/abs/1801.01290, SAC Paper
+4. https://arxiv.org/abs/1803.07055, ARS Paper
