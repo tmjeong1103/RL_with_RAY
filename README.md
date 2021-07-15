@@ -1,12 +1,7 @@
 # RL_with_RAY
---------------------------------------------------------------------------------
 
-> Minimal and clean examples of reinforcement learning algorithms presented by [RLCode](https://rlcode.github.io) team. [[한국어]](https://github.com/rlcode/reinforcement-learning-kr)
->
-> Maintainers - [Woongwon](https://github.com/dnddnjs), [Youngmoo](https://github.com/zzing0907), [Hyeokreal](https://github.com/Hyeokreal), [Uiryeong](https://github.com/wooridle), [Keon](https://github.com/keon)
-
-From the basics to deep reinforcement learning, this repo provides easy-to-read code examples. One file for each algorithm.
-Please feel free to create a [Pull Request](https://github.com/rlcode/reinforcement-learning/pulls), or open an [issue](https://github.com/rlcode/reinforcement-learning/issues)!
+> Implementation of reinforcement learning algorithms that is applied RAY
+> In this repo, we implemented this RL_with_RAY code only use RAY CORE from scratch, didn't use RLLib.
 
 ## Dependencies
 1. Python 3.5
