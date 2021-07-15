@@ -20,11 +20,11 @@ pip install -r requirements.txt
 
 ## Contents
 
-**PPO with RAY**
+### PPO with RAY
 - 
 
-**SAC with RAY**
+### SAC with RAY
 - 
 
-**ARS with RAY**
+### ARS with RAY
 - 
