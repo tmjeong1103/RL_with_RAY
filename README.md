@@ -18,9 +18,9 @@
 pip install -r requirements.txt
 ```
 
-## Table of Contents
+## Contents
 
-**Grid World** - Mastering the basics of reinforcement learning in the simplified world called "Grid World"
+**AntBulletEnv-v0**
 
 - [Policy Iteration](./1-grid-world/1-policy-iteration)
 - [Value Iteration](./1-grid-world/2-value-iteration)
