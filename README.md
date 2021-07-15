@@ -30,7 +30,7 @@ pip install -r requirements.txt
 -
 
 ## Run
-- Worker :
+- set worker number:
 
 ## Reference
 1. https://docs.ray.io/en/master/index.html, RAY Documentation
