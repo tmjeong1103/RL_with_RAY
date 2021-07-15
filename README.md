@@ -1,15 +1,15 @@
 # RL_with_RAY
 
-> Implementation of reinforcement learning algorithms that is applied RAY
+> Implementation of reinforcement learning algorithms that is applied RAY in PyTorch.
 > 
 > In this repo, we implemented this RL_with_RAY code only use RAY CORE from scratch, didn't use RLLib.
 > 
 
 ## Dependencies
-1. Python 3.5
-2. Tensorflow 1.0.0
-3. Keras
-4. numpy
+1. Python 3.6.x
+2. PyTorch 1.8.1
+3. Pybullet 3.1.7
+4. 
 5. pandas
 6. matplot
 7. pillow
