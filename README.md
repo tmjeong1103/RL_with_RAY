@@ -10,6 +10,7 @@
 2. PyTorch 1.8.1
 3. RAY 1.3.0
 4. pybullet-gym
+5. numpy
 
 
 ### Install Requirements
