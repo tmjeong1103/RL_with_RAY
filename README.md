@@ -30,8 +30,11 @@ pip install -r requirements.txt
 -
 
 ## Run
-### set configuration
-1. 
+### Set configuration
+1. n_worker
+2. total_steps 
+3. ep_len_rollout
+4. hdims
 
 ## Reference
 1. https://docs.ray.io/en/master/index.html, RAY Documentation
