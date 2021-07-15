@@ -8,13 +8,9 @@
 ## Dependencies
 1. Python 3.6.x
 2. PyTorch 1.8.1
-3. Pybullet 3.1.7
-4. 
-5. pandas
-6. matplot
-7. pillow
-8. Skimage
-9. h5py
+3. RAY 1.3.0
+4. pybullet-gym
+
 
 ### Install Requirements
 ```
