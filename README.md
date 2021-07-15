@@ -28,10 +28,12 @@ pip install -r requirements.txt
 
 ### ARS with RAY
 #### Hyperparameter
+```
 - n_cpu = n_workers = 5
 - hdims = [256,256]
 - actv = nn.Tanh()
 - out_actv = nn.Tanh()
+```
 
 ## Run
 ### Set configuration
