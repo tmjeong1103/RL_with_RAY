@@ -30,8 +30,8 @@ pip install -r requirements.txt
 -
 
 ## Run
-- set configuration
-- 
+### set configuration
+1. 
 
 ## Reference
 1. https://docs.ray.io/en/master/index.html, RAY Documentation
